@@ -82,12 +82,22 @@
 
         var codebtn = "";
 
-        for (var i = 1; i <= numtotbuttons; i++) {
+        if ($(obj).data("tablepage") > 1) {
+            codebtn += "<button><</button>";
+        }
+
+        var cnt = 0;
+
+        for (var i = 1; i <= numtotbuttons && ++cnt < 5; i++) {
             if (i == $(obj).data("tablepage")) {
                 codebtn += "<button class=\"cred\">" + i + "</button>";
             } else {
                 codebtn += "<button>" + i + "</button>";
             }
+        } //close for
+
+        if (1) {
+
         }
         //create footer
         var tf = "<tfoot><tr><td colspan=\"" + numcol + "\"><div id=\"buttons\">" + codebtn + "</div></td></tr></tfoot>"
@@ -100,11 +110,14 @@
     //events handle
 
     $(document).on("click", "#buttons button", function () {
+      
         switch ($(this).html()) {
             case '<':
+            case '&lt;':
                 $(obj).data("tablepage", $(obj).data("tablepage") - 1);
                 break;
             case '>':
+            case '&lr;':
                 $(obj).data("tablepage", $(obj).data("tablepage") + 1);
                 break;
             default:

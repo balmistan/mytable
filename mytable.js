@@ -11,7 +11,7 @@
 // valori di default
         var config = {
             'tablearrayjs': Array(),
-            'numrowperpage': 15
+            'numrowperpage': 3
         };
         if (options)
             $.extend(config, options);
@@ -44,8 +44,13 @@
         if ($(obj).data("tablearray")["tabcontent"] !== undefined) {  // if there is data
             var totalnumrows = $(obj).data("tablearray")["tabcontent"].length
             //alert(totalnumrows)
+            var startrow = $(obj).data("tablepage") == 1 ? 0 : ($(obj).data("tablepage")-1) * $(obj).data("numrowperpage");
+            var endrow = $(obj).data("tablepage") * $(obj).data("numrowperpage");
+            
+            //alert("start: " + startrow + " end: " + endrow)
             // create data content
-            for (var i in $(obj).data("tablearray")["tabcontent"]) {
+            //for (var i in $(obj).data("tablearray")["tabcontent"]) {
+            for (var i=startrow; i<endrow && i<$(obj).data("tablearray")["tabcontent"].length; i++) {
                 dt += "<tr>\n";
                 for (var index in $(obj).data("tablearray")["tabheader"]) {
                     //alert(tablearray["tabheader"][index])

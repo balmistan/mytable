@@ -43,6 +43,7 @@
         }
         if ($(obj).data("tablearray")["tabcontent"] !== undefined) {  // if there is data
             var totalnumrows = $(obj).data("tablearray")["tabcontent"].length
+
             //alert(totalnumrows)
             var startrow = $(obj).data("tablepage") == 1 ? 0 : ($(obj).data("tablepage") - 1) * $(obj).data("numrowperpage");
             var endrow = $(obj).data("tablepage") * $(obj).data("numrowperpage");
@@ -50,12 +51,12 @@
             //alert("start: " + startrow + " end: " + endrow)
             // create data content
             if ($(obj).data("tablearray")["tabheader"][0]["data"] === undefined || $(obj).data("tablearray")["tabcontent"][0][$(obj).data("tablearray")["tabheader"][0]["data"]] === undefined) {
-              //Data from csv
-              
-              for (var i = startrow; i < endrow && i < $(obj).data("tablearray")["tabcontent"].length; i++) {
+                //Data from csv
+
+                for (var i = startrow; i < endrow && i < $(obj).data("tablearray")["tabcontent"].length; i++) {
                     dt += "<tr>\n";
-                    for (var index=0; index<$(obj).data("tablearray")["tabcontent"][i].length; index++) {
-                       
+                    for (var index = 0; index < $(obj).data("tablearray")["tabcontent"][i].length; index++) {
+
                         dt += "<td>" + $(obj).data("tablearray")["tabcontent"][i][index] + "</td>\n";
                     }
                     dt += "</tr>";
@@ -99,7 +100,17 @@
     //events handle
 
     $(document).on("click", "#buttons button", function () {
-        $(obj).data("tablepage", $(this).html());
+        switch ($(this).html()) {
+            case '<':
+                $(obj).data("tablepage", $(obj).data("tablepage") - 1);
+                break;
+            case '>':
+                $(obj).data("tablepage", $(obj).data("tablepage") + 1);
+                break;
+            default:
+                $(obj).data("tablepage", $(this).html());
+                break;
+        }
         tabledraw();
     })
 

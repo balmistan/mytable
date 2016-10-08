@@ -17,6 +17,9 @@
             $.extend(config, options);
         this.each(function () {
             obj = $(this);
+            $(obj).data("tablearray", config["tablearrayjs"]);
+            $(obj).data("tablepage", 1);
+            $(obj).data("numrowperpage", config["numrowperpage"]);
             $(obj).html(tabledraw(config["tablearrayjs"], 1, config["numrowperpage"]));
             //  alert(hd+dt)
         });  //close this.each(function () {...
@@ -74,6 +77,7 @@
 
     $(document).on("click", "#buttons button", function () {
         //alert($(this).html())
+        
     })
 
 

@@ -11,7 +11,7 @@
 // valori di default
         var config = {
             'tablearrayjs': Array(),
-            'numrowperpage': 3
+            'numrowperpage': 10
         };
         if (options)
             $.extend(config, options);

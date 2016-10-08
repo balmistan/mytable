@@ -1,7 +1,26 @@
-.cbold{
-    font-weight: bold;
-}
+
 
 .cred{
- color:red;
+    color:red;
+}
+#mytable{
+    font-family: "Lucida Console", Monaco, monospace;
+    border: 2px solid grey;
+    border-spacing: 0;
+    border-collapse: collapse;
+    height: 300px;
+    overflow-y: scroll;
+}
+
+#mytable tr:nth-child(odd) {
+    background: #F9F9F9
+}
+
+#mytable td{
+    border: 1px dotted grey;
+}
+#mytable th{
+    color:white;
+    font-weight: bold;
+    background-color: #678564;
 }

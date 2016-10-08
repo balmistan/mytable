@@ -11,7 +11,7 @@
 // valori di default
         var config = {
             'tablearrayjs': Array(),
-            'numrowperpage': 10
+            'numrowperpage': 2
         };
         if (options)
             $.extend(config, options);
@@ -81,14 +81,24 @@
         var numtotbuttons = totalnumrows % $(obj).data("numrowperpage") > 0 ? Math.floor(totalnumrows / $(obj).data("numrowperpage")) + 1 : Math.floor(totalnumrows / $(obj).data("numrowperpage"))
 
         var codebtn = "";
-
+        
         if ($(obj).data("tablepage") > 1) {
             codebtn += "<button><</button>";
         }
+        
+        if($(obj).data("tablepage")==1){
+            codebtn += "<button class=\"cred\">1</button>";
+        }else{
+            codebtn += "<button>1</button>";
+        }
+
+        
+        
 
         var cnt = 0;
 
-        for (var i = 1; i <= numtotbuttons && ++cnt < 5; i++) {
+        for (var i = 2; i <= numtotbuttons && cnt < 4; i++) {
+            cnt++;
             if (i == $(obj).data("tablepage")) {
                 codebtn += "<button class=\"cred\">" + i + "</button>";
             } else {
@@ -96,8 +106,8 @@
             }
         } //close for
 
-        if (1) {
-
+        if ($(obj).data("tablepage") < numtotbuttons) {
+            codebtn += "...<button>></button>";
         }
         //create footer
         var tf = "<tfoot><tr><td colspan=\"" + numcol + "\"><div id=\"buttons\">" + codebtn + "</div></td></tr></tfoot>"
@@ -110,15 +120,16 @@
     //events handle
 
     $(document).on("click", "#buttons button", function () {
-      
+alert($(this).html())
         switch ($(this).html()) {
             case '<':
             case '&lt;':
-                $(obj).data("tablepage", $(obj).data("tablepage") - 1);
+                $(obj).data("tablepage", parseInt($(obj).data("tablepage")) - 1);
                 break;
             case '>':
-            case '&lr;':
-                $(obj).data("tablepage", $(obj).data("tablepage") + 1);
+            case '&gt;':
+                $(obj).data("tablepage", parseInt($(obj).data("tablepage")) + 1);
+                alert($(obj).data("tablepage"))
                 break;
             default:
                 $(obj).data("tablepage", $(this).html());

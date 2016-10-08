@@ -20,14 +20,14 @@
             $(obj).data("tablearray", config["tablearrayjs"]);
             $(obj).data("tablepage", 1);
             $(obj).data("numrowperpage", config["numrowperpage"]);
-            $(obj).html(tabledraw(config["tablearrayjs"], 1, config["numrowperpage"]));
+            $(obj).html(tabledraw());
             //  alert(hd+dt)
         });  //close this.each(function () {...
 
     }
 
 
-    function tabledraw(tablearray, tablepage, numrowperpage) {
+    function tabledraw() {
         var hd = "<thead>";
         var dt = "<tbody>";
         if ($(obj).data("tablearray")["tabheader"] !== undefined) {
@@ -42,7 +42,7 @@
 
         }
         if ($(obj).data("tablearray")["tabcontent"] !== undefined) {  // if there is data
-            var totalnumrows = tablearray["tabcontent"].length
+            var totalnumrows = $(obj).data("tablearray")["tabcontent"].length
             //alert(totalnumrows)
             // create data content
             for (var i in $(obj).data("tablearray")["tabcontent"]) {
@@ -59,12 +59,16 @@
         //create block button
         // alert(Math.floor(totalnumrows / config["numrowperpage"]) + "; "+ totalnumrows % config["numrowperpage"])
         //alert(totalnumrows % numrowperpage)
-        var numtotbuttons = totalnumrows % numrowperpage > 0 ? Math.floor(totalnumrows / numrowperpage) + 1 : Math.floor(totalnumrows / numrowperpage)
-       
+        var numtotbuttons = totalnumrows % $(obj).data("numrowperpage") > 0 ? Math.floor(totalnumrows / $(obj).data("numrowperpage")) + 1 : Math.floor(totalnumrows / $(obj).data("numrowperpage"))
+
         var codebtn = "";
 
         for (var i = 1; i <= numtotbuttons; i++) {
-            codebtn += "<button>" + i + "</button>";
+            if (i == $(obj).data("tablepage")) {
+                codebtn += "<button class=\"cred\">" + i + "</button>";
+            } else {
+                codebtn += "<button>" + i + "</button>";
+            }
         }
         //create footer
         var tf = "<tfoot><tr><td colspan=\"" + numcol + "\"><div id=\"buttons\">" + codebtn + "</div></td></tr></tfoot>"
@@ -77,7 +81,7 @@
 
     $(document).on("click", "#buttons button", function () {
         //alert($(this).html())
-        
+
     })
 
 

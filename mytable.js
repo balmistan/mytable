@@ -83,8 +83,6 @@
     $(document).on("click", "#buttons button", function () {
         $(obj).data("tablepage", $(this).html());
         tabledraw();
-        //alert($(this).html())
-
     })
 
 

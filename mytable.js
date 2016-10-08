@@ -81,23 +81,27 @@
         var numtotbuttons = totalnumrows % $(obj).data("numrowperpage") > 0 ? Math.floor(totalnumrows / $(obj).data("numrowperpage")) + 1 : Math.floor(totalnumrows / $(obj).data("numrowperpage"))
 
         var codebtn = "";
-        
+
         if ($(obj).data("tablepage") > 1) {
             codebtn += "<button><</button>";
         }
-        
-        if($(obj).data("tablepage")==1){
+
+        if ($(obj).data("tablepage") == 1) {
             codebtn += "<button class=\"cred\">1</button>";
-        }else{
+        } else {
             codebtn += "<button>1</button>";
         }
 
-        
-        
+
+
 
         var cnt = 0;
 
-        for (var i = 2; i <= numtotbuttons && cnt < 4; i++) {
+        var start = parseInt($(obj).data("tablepage")) > 5 ? parseInt($(obj).data("tablepage")) - 3 : 2
+        if (parseInt($(obj).data("tablepage")) > 5) {
+            codebtn += "...";
+        }
+        for (var i = start; i <= numtotbuttons && cnt < 4; i++) {
             cnt++;
             if (i == $(obj).data("tablepage")) {
                 codebtn += "<button class=\"cred\">" + i + "</button>";
@@ -120,7 +124,7 @@
     //events handle
 
     $(document).on("click", "#buttons button", function () {
-alert($(this).html())
+//alert($(this).html())
         switch ($(this).html()) {
             case '<':
             case '&lt;':
@@ -129,7 +133,7 @@ alert($(this).html())
             case '>':
             case '&gt;':
                 $(obj).data("tablepage", parseInt($(obj).data("tablepage")) + 1);
-                alert($(obj).data("tablepage"))
+                // alert($(obj).data("tablepage"))
                 break;
             default:
                 $(obj).data("tablepage", $(this).html());

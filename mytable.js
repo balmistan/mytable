@@ -20,7 +20,7 @@
             $(obj).data("tablearray", config["tablearrayjs"]);
             $(obj).data("tablepage", 1);
             $(obj).data("numrowperpage", config["numrowperpage"]);
-            $(obj).html(tabledraw());
+            tabledraw();
             //  alert(hd+dt)
         });  //close this.each(function () {...
 
@@ -73,13 +73,16 @@
         //create footer
         var tf = "<tfoot><tr><td colspan=\"" + numcol + "\"><div id=\"buttons\">" + codebtn + "</div></td></tr></tfoot>"
 
-        return(hd + dt + tf);
+        $(obj).html(hd + dt + tf);
+        return;
     }
 
 
     //events handle
 
     $(document).on("click", "#buttons button", function () {
+        $(obj).data("tablepage", $(this).html());
+        tabledraw();
         //alert($(this).html())
 
     })

@@ -30,26 +30,26 @@
     function tabledraw(tablearray, tablepage, numrowperpage) {
         var hd = "<thead>";
         var dt = "<tbody>";
-        if (tablearray["tabheader"] !== undefined) {
-            var numcol = tablearray["tabheader"].length;
+        if ($(obj).data("tablearray")["tabheader"] !== undefined) {
+            var numcol = $(obj).data("tablearray")["tabheader"].length;
             //create header
 
             hd += "<tr>\n";
             for (var i = 0; i < numcol; i++) {
-                hd += "<th>" + tablearray["tabheader"][i]["title"] + "</th>\n";
+                hd += "<th>" + $(obj).data("tablearray")["tabheader"][i]["title"] + "</th>\n";
             }
             hd += "</tr></thead>\n"
 
         }
-        if (tablearray["tabcontent"] !== undefined) {  // if there is data
+        if ($(obj).data("tablearray")["tabcontent"] !== undefined) {  // if there is data
             var totalnumrows = tablearray["tabcontent"].length
             //alert(totalnumrows)
             // create data content
-            for (var i in tablearray["tabcontent"]) {
+            for (var i in $(obj).data("tablearray")["tabcontent"]) {
                 dt += "<tr>\n";
-                for (var index in tablearray["tabheader"]) {
+                for (var index in $(obj).data("tablearray")["tabheader"]) {
                     //alert(tablearray["tabheader"][index])
-                    dt += "<td>" + tablearray["tabcontent"][i][tablearray["tabheader"][index]["data"]] + "</td>\n";
+                    dt += "<td>" + $(obj).data("tablearray")["tabcontent"][i][$(obj).data("tablearray")["tabheader"][index]["data"]] + "</td>\n";
                 }
                 dt += "</tr>";
             }//close extern for

@@ -44,20 +44,33 @@
         if ($(obj).data("tablearray")["tabcontent"] !== undefined) {  // if there is data
             var totalnumrows = $(obj).data("tablearray")["tabcontent"].length
             //alert(totalnumrows)
-            var startrow = $(obj).data("tablepage") == 1 ? 0 : ($(obj).data("tablepage")-1) * $(obj).data("numrowperpage");
+            var startrow = $(obj).data("tablepage") == 1 ? 0 : ($(obj).data("tablepage") - 1) * $(obj).data("numrowperpage");
             var endrow = $(obj).data("tablepage") * $(obj).data("numrowperpage");
-            
+
             //alert("start: " + startrow + " end: " + endrow)
             // create data content
-            //for (var i in $(obj).data("tablearray")["tabcontent"]) {
-            for (var i=startrow; i<endrow && i<$(obj).data("tablearray")["tabcontent"].length; i++) {
-                dt += "<tr>\n";
-                for (var index in $(obj).data("tablearray")["tabheader"]) {
-                    //alert(tablearray["tabheader"][index])
-                    dt += "<td>" + $(obj).data("tablearray")["tabcontent"][i][$(obj).data("tablearray")["tabheader"][index]["data"]] + "</td>\n";
-                }
-                dt += "</tr>";
-            }//close extern for
+            if ($(obj).data("tablearray")["tabheader"][0]["data"] === undefined || $(obj).data("tablearray")["tabcontent"][0][$(obj).data("tablearray")["tabheader"][0]["data"]] === undefined) {
+              //Data from csv
+              
+              for (var i = startrow; i < endrow && i < $(obj).data("tablearray")["tabcontent"].length; i++) {
+                    dt += "<tr>\n";
+                    for (var index=0; index<$(obj).data("tablearray")["tabcontent"][i].length; index++) {
+                       
+                        dt += "<td>" + $(obj).data("tablearray")["tabcontent"][i][index] + "</td>\n";
+                    }
+                    dt += "</tr>";
+                }//close extern for
+
+            } else {//Data from queries
+                for (var i = startrow; i < endrow && i < $(obj).data("tablearray")["tabcontent"].length; i++) {
+                    dt += "<tr>\n";
+                    for (var index in $(obj).data("tablearray")["tabheader"]) {
+                        //alert(tablearray["tabheader"][index])
+                        dt += "<td>" + $(obj).data("tablearray")["tabcontent"][i][$(obj).data("tablearray")["tabheader"][index]["data"]] + "</td>\n";
+                    }
+                    dt += "</tr>";
+                }//close extern for
+            }//close else
             dt += "</tbody>";
         } //close if (config["content"]["data"][0] !== undefined) {...
 

@@ -3,13 +3,17 @@
 .cred{
     color:red;
 }
+
+.cbold{
+    font-weight: bold;
+}
 #mytable{
     font-family: "Lucida Console", Monaco, monospace;
     border: 2px solid grey;
     border-spacing: 0;
     border-collapse: collapse;
     height: 300px;
-    overflow-y: scroll;
+    overflow: scroll;
 }
 
 #mytable tr:nth-child(odd) {
@@ -23,4 +27,10 @@
     color:white;
     font-weight: bold;
     background-color: #678564;
+    padding: 10px;
+    height: 20px;
+}
+
+#mytable tfoot{
+    text-align: center;
 }

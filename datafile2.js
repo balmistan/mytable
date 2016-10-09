@@ -6,7 +6,7 @@ tabledata["tabheader"][2] = {"title": "province", "data": "province"};
 
 
 tabledata["tabcontent"] = Array();
-
+/*
 tabledata["tabcontent"][0] = Array("4", "Antillo");
 tabledata["tabcontent"][1] = Array("127", "Balme", "");
 tabledata["tabcontent"][2] = Array("30", "Galati Mamertino", "");
@@ -24,7 +24,7 @@ tabledata["tabcontent"][13] = Array("2108", "Ornica", "");
 tabledata["tabcontent"][14] = Array("2062", "Foresto Sparso", "");
 tabledata["tabcontent"][15] = Array("2010", "Canonica D'Adda", "");
 
-
+*/
 
 
  
